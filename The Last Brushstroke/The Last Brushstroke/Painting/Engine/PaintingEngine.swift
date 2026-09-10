@@ -1,19 +1,32 @@
+//
+//  PaintingEngine.swift
+//  The Last Brushstroke
+//
+
 import Foundation
 
 final class PaintingEngine {
+
     private let clock: PaintingClock
     private let progressCalculator: PaintingProgressCalculator
+    private let activityPolicy: PaintingActivityPolicy
 
     private var status: PaintingStatus = .idle
 
     init(
         requiredDuration: TimeInterval,
+        activityPolicy: PaintingActivityPolicy = .lockOnly,
         timeSource: any PaintingTimeSource = SystemUptimeTimeSource()
     ) {
-        clock = PaintingClock(timeSource: timeSource)
+        clock = PaintingClock(
+            timeSource: timeSource
+        )
+
         progressCalculator = PaintingProgressCalculator(
             requiredDuration: requiredDuration
         )
+
+        self.activityPolicy = activityPolicy
     }
 
     var state: PaintingState {
@@ -22,7 +35,9 @@ final class PaintingEngine {
     }
 
     func start() {
-        guard status == .idle else { return }
+        guard status == .idle else {
+            return
+        }
 
         clock.start()
         status = .painting
@@ -31,14 +46,18 @@ final class PaintingEngine {
     func pause() {
         updateCompletionIfNeeded()
 
-        guard status == .painting else { return }
+        guard status == .painting else {
+            return
+        }
 
         clock.pause()
         status = .paused
     }
 
     func resume() {
-        guard status == .paused else { return }
+        guard status == .paused else {
+            return
+        }
 
         clock.resume()
         status = .painting
@@ -49,7 +68,51 @@ final class PaintingEngine {
         status = .completed
     }
 
-    func restore(state: PaintingState) {
+    func updateActivity(
+        isLocked: Bool,
+        isSleeping: Bool
+    ) {
+        guard status != .completed else {
+            return
+        }
+
+        let shouldPaint = activityPolicy.shouldPaint(
+            isLocked: isLocked,
+            isSleeping: isSleeping
+        )
+
+        if shouldPaint {
+            resumeIfNeeded()
+        } else {
+            pauseIfNeeded()
+        }
+
+        updateCompletionIfNeeded()
+    }
+
+    func save(
+        using persistence: any PersistenceService
+    ) throws {
+        try persistence.save(
+            state
+        )
+    }
+
+    func restore(
+        using persistence: any PersistenceService
+    ) throws {
+        guard let savedState = try persistence.load() else {
+            return
+        }
+
+        restore(
+            state: savedState
+        )
+    }
+
+    func restore(
+        state: PaintingState
+    ) {
         status = state.status
 
         clock.restore(
@@ -60,16 +123,26 @@ final class PaintingEngine {
         updateCompletionIfNeeded()
     }
 
-    func save(using persistence: any PersistenceService) throws {
-        try persistence.save(state)
+    private func resumeIfNeeded() {
+        switch status {
+        case .idle:
+            start()
+
+        case .paused:
+            resume()
+
+        case .painting, .completed:
+            break
+        }
     }
 
-    func restore(using persistence: any PersistenceService) throws {
-        guard let savedState = try persistence.load() else {
+    private func pauseIfNeeded() {
+        guard status == .painting else {
             return
         }
 
-        restore(state: savedState)
+        clock.pause()
+        status = .paused
     }
 
     private func updateCompletionIfNeeded() {
@@ -90,15 +163,11 @@ final class PaintingEngine {
     private func makeState() -> PaintingState {
         let accumulatedDuration = clock.accumulatedDuration
 
-        let progress: Double
-
-        if status == .completed {
-            progress = 1
-        } else {
-            progress = progressCalculator.progress(
+        let progress = status == .completed
+            ? 1
+            : progressCalculator.progress(
                 for: accumulatedDuration
             )
-        }
 
         return PaintingState(
             status: status,
