@@ -1,11 +1,6 @@
-//
-//  PaintingState.swift
-//  The Last Brushstroke
-//
-
 import Foundation
 
-struct PaintingState: Equatable {
+struct PaintingState: Codable, Equatable {
     let status: PaintingStatus
     let accumulatedDuration: TimeInterval
     let progress: Double

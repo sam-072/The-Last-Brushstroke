@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+
+    let coordinator: AppCoordinator
+
     var body: some View {
-        PaintingView()
+        PaintingView(
+            coordinator: coordinator
+        )
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(
+        coordinator: AppCoordinator()
+    )
 }

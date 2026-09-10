@@ -6,6 +6,16 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		A00100000000000000000008 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 52682A5C30505EE9001D4AC3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52682A6330505EE9001D4AC3;
+			remoteInfo = "The Last Brushstroke";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		52682A6430505EE9001D4AC3 /* The Last Brushstroke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Last Brushstroke.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A00100000000000000000001 /* The Last BrushstrokeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "The Last BrushstrokeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,24 +119,6 @@
 		};
 /* End PBXNativeTarget section */
 
-/* Begin PBXContainerItemProxy section */
-		A00100000000000000000008 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 52682A5C30505EE9001D4AC3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 52682A6330505EE9001D4AC3;
-			remoteInfo = "The Last Brushstroke";
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXTargetDependency section */
-		A00100000000000000000007 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 52682A6330505EE9001D4AC3 /* The Last Brushstroke */;
-			targetProxy = A00100000000000000000008 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXProject section */
 		52682A5C30505EE9001D4AC3 /* Project object */ = {
 			isa = PBXProject;
@@ -134,14 +126,14 @@
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2660;
 				LastUpgradeCheck = 2660;
-			TargetAttributes = {
-				52682A6330505EE9001D4AC3 = {
-					CreatedOnToolsVersion = 26.6;
-				};
-				A00100000000000000000004 = {
-					CreatedOnToolsVersion = 26.6;
-					TestTargetID = 52682A6330505EE9001D4AC3;
-				};
+				TargetAttributes = {
+					52682A6330505EE9001D4AC3 = {
+						CreatedOnToolsVersion = 26.6;
+					};
+					A00100000000000000000004 = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = 52682A6330505EE9001D4AC3;
+					};
 				};
 			};
 			buildConfigurationList = 52682A5F30505EE9001D4AC3 /* Build configuration list for PBXProject "The Last Brushstroke" */;
@@ -190,6 +182,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A00100000000000000000007 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52682A6330505EE9001D4AC3 /* The Last Brushstroke */;
+			targetProxy = A00100000000000000000008 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		52682A6D30505EEB001D4AC3 /* Debug */ = {

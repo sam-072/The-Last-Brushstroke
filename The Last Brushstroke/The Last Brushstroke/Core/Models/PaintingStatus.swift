@@ -1,9 +1,6 @@
-//
-//  PaintingStatus.swift
-//  The Last Brushstroke
-//
+import Foundation
 
-enum PaintingStatus: Equatable {
+enum PaintingStatus: String, Codable, Equatable {
     case idle
     case painting
     case paused

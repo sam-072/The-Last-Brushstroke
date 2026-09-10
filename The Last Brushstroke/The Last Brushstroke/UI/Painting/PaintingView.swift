@@ -7,8 +7,12 @@ import SpriteKit
 import SwiftUI
 
 struct PaintingView: View {
-    @State private var engine = PaintingEngine(requiredDuration: 3_600)
-    @State private var scene = PaintingScene(size: .init(width: 1, height: 1))
+
+    let coordinator: AppCoordinator
+
+    @State private var scene = PaintingScene(
+        size: .init(width: 1, height: 1)
+    )
 
     var body: some View {
         GeometryReader { proxy in
@@ -21,20 +25,27 @@ struct PaintingView: View {
                     updateSceneSize(newSize)
                     renderCurrentState()
                 }
+                .onChange(of: coordinator.paintingState) {
+                    renderCurrentState()
+                }
         }
-        .frame(minWidth: 720, minHeight: 480)
+        .frame(
+            minWidth: 720,
+            minHeight: 480
+        )
     }
 
     private func updateSceneSize(_ size: CGSize) {
-        guard size.width > 0, size.height > 0 else { return }
+        guard size.width > 0, size.height > 0 else {
+            return
+        }
+
         scene.size = size
     }
 
     private func renderCurrentState() {
-        scene.render(state: engine.state)
+        scene.render(
+            state: coordinator.paintingState
+        )
     }
-}
-
-#Preview {
-    PaintingView()
 }

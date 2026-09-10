@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct The_Last_BrushstrokeApp: App {
+
+    @State private var coordinator = AppCoordinator()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(
+                coordinator: coordinator
+            )
         }
     }
 }
