@@ -1,26 +1,45 @@
-//
-//  PaintingActivityController.swift
-//  The Last Brushstroke
-//
-
 import Foundation
 
 @MainActor
 final class PaintingActivityController {
-
     private let engine: PaintingEngine
+    private let systemStateMonitor: SystemStateMonitor
 
-    init(engine: PaintingEngine) {
+    var onStateChange: (() -> Void)?
+
+    init(
+        engine: PaintingEngine,
+        systemStateMonitor: SystemStateMonitor
+    ) {
         self.engine = engine
+        self.systemStateMonitor = systemStateMonitor
+
+        systemStateMonitor.onStateChange = { [weak self] state in
+            self?.handle(systemState: state)
+        }
     }
 
-    func update(
-        isLocked: Bool,
-        isSleeping: Bool
-    ) {
+    func start() {
+        systemStateMonitor.start()
+        handle(systemState: systemStateMonitor.currentState)
+    }
+
+    func stop() {
+        systemStateMonitor.stop()
+    }
+
+    private func handle(systemState: SystemState) {
+        let previousState = engine.state
+
         engine.updateActivity(
-            isLocked: isLocked,
-            isSleeping: isSleeping
+            isLocked: systemState.isLocked,
+            isSleeping: systemState.isSleeping
         )
+
+        let newState = engine.state
+
+        if previousState != newState {
+            onStateChange?()
+        }
     }
 }
