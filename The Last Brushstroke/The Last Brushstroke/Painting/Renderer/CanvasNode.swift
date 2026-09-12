@@ -6,16 +6,22 @@
 import SpriteKit
 
 final class CanvasNode: SKNode {
-    private let canvasRect: CGRect
+    let canvasRect: CGRect
     private let skyNode = SKNode()
     private let mountainNode = SKNode()
     private let groundNode = SKNode()
     private let treeNode = SKNode()
     private let detailNode = SKNode()
+    private let brushStrokeRenderer: BrushStrokeRenderer
 
     init(canvasRect: CGRect) {
         self.canvasRect = canvasRect
+        self.brushStrokeRenderer = BrushStrokeRenderer(
+            canvasRect: canvasRect
+        )
+
         super.init()
+
         addFrame()
         addLayers()
         render(progress: 0)
@@ -27,11 +33,40 @@ final class CanvasNode: SKNode {
 
     func render(progress: Double) {
         let progress = min(max(progress, 0), 1)
-        skyNode.alpha = reveal(progress, from: 0, to: 0.2)
-        mountainNode.alpha = reveal(progress, from: 0.2, to: 0.4)
-        groundNode.alpha = reveal(progress, from: 0.4, to: 0.6)
-        treeNode.alpha = reveal(progress, from: 0.6, to: 0.8)
-        detailNode.alpha = reveal(progress, from: 0.8, to: 1)
+
+        skyNode.alpha = reveal(
+            progress,
+            from: 0.0,
+            to: 0.25
+        )
+
+        mountainNode.alpha = reveal(
+            progress,
+            from: 0.15,
+            to: 0.45
+        )
+
+        groundNode.alpha = reveal(
+            progress,
+            from: 0.35,
+            to: 0.65
+        )
+
+        treeNode.alpha = reveal(
+            progress,
+            from: 0.55,
+            to: 0.85
+        )
+
+        detailNode.alpha = reveal(
+            progress,
+            from: 0.75,
+            to: 1.0
+        )
+
+        brushStrokeRenderer.updateStroke(
+            progress: progress
+        )
     }
 
     private func addFrame() {
@@ -60,7 +95,7 @@ final class CanvasNode: SKNode {
         addMountains()
         addGround()
         addTrees()
-        BrushStrokeRenderer(canvasRect: canvasRect).add(to: detailNode)
+        brushStrokeRenderer.add(to: detailNode)
         [skyNode, mountainNode, groundNode, treeNode, detailNode].forEach(landscape.addChild)
         addChild(landscape)
     }
