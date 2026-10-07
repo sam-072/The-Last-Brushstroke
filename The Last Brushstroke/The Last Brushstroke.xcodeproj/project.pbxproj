@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		525B3B663055B4D5006235FB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525B3B653055B4D5006235FB /* Cocoa.framework */; };
+		525B3B683055B4E3006235FB /* ScreenSaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525B3B673055B4E3006235FB /* ScreenSaver.framework */; };
+		525B3B6A3055B4ED006235FB /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525B3B693055B4ED006235FB /* SpriteKit.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		A00100000000000000000008 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -17,10 +23,37 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		525B3B413055AF09006235FB /* The Last Brushstroke Screen Saver.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "The Last Brushstroke Screen Saver.saver"; sourceTree = BUILT_PRODUCTS_DIR; };
+		525B3B413055AF09006235FB /* The Last Brushstroke.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "The Last Brushstroke.saver"; sourceTree = BUILT_PRODUCTS_DIR; };
+		525B3B653055B4D5006235FB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		525B3B673055B4E3006235FB /* ScreenSaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScreenSaver.framework; path = System/Library/Frameworks/ScreenSaver.framework; sourceTree = SDKROOT; };
+		525B3B693055B4ED006235FB /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		52682A6430505EE9001D4AC3 /* The Last Brushstroke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Last Brushstroke.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A00100000000000000000001 /* The Last BrushstrokeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "The Last BrushstrokeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		525B3B573055B3D3006235FB /* Exceptions for "The Last Brushstroke" folder in "The Last Brushstroke Screen Saver" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Core/Models/PaintingState.swift,
+				Core/Models/PaintingStatus.swift,
+				Core/Persistence/FileStorage.swift,
+				Core/Persistence/PersistenceService.swift,
+				Core/Policy/PaintingActivityPolicy.swift,
+				Painting/Animation/BrushAnimation.swift,
+				Painting/Animation/PainterAnimationController.swift,
+				Painting/Engine/PaintingClock.swift,
+				Painting/Engine/PaintingEngine.swift,
+				Painting/Engine/PaintingProgressCalculator.swift,
+				Painting/Renderer/BrushStrokeRenderer.swift,
+				Painting/Renderer/CanvasNode.swift,
+				Painting/Renderer/PainterNode.swift,
+				Painting/Renderer/PaintingScene.swift,
+				Painting/Renderer/PaintingVisualStage.swift,
+			);
+			target = 525B3B403055AF09006235FB /* The Last Brushstroke Screen Saver */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		525B3B423055AF09006235FB /* The Last Brushstroke Screen Saver */ = {
@@ -30,6 +63,9 @@
 		};
 		52682A6630505EE9001D4AC3 /* The Last Brushstroke */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				525B3B573055B3D3006235FB /* Exceptions for "The Last Brushstroke" folder in "The Last Brushstroke Screen Saver" target */,
+			);
 			path = "The Last Brushstroke";
 			sourceTree = "<group>";
 		};
@@ -45,6 +81,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				525B3B683055B4E3006235FB /* ScreenSaver.framework in Frameworks */,
+				525B3B663055B4D5006235FB /* Cocoa.framework in Frameworks */,
+				525B3B6A3055B4ED006235FB /* SpriteKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,12 +104,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		525B3B643055B4D5006235FB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				525B3B693055B4ED006235FB /* SpriteKit.framework */,
+				525B3B673055B4E3006235FB /* ScreenSaver.framework */,
+				525B3B653055B4D5006235FB /* Cocoa.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		52682A5B30505EE9001D4AC3 = {
 			isa = PBXGroup;
 			children = (
 				52682A6630505EE9001D4AC3 /* The Last Brushstroke */,
 				A00100000000000000000002 /* The Last BrushstrokeTests */,
 				525B3B423055AF09006235FB /* The Last Brushstroke Screen Saver */,
+				525B3B643055B4D5006235FB /* Frameworks */,
 				52682A6530505EE9001D4AC3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -80,7 +130,7 @@
 			children = (
 				52682A6430505EE9001D4AC3 /* The Last Brushstroke.app */,
 				A00100000000000000000001 /* The Last BrushstrokeTests.xctest */,
-				525B3B413055AF09006235FB /* The Last Brushstroke Screen Saver.saver */,
+				525B3B413055AF09006235FB /* The Last Brushstroke.saver */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -118,7 +168,7 @@
 			packageProductDependencies = (
 			);
 			productName = "The Last Brushstroke Screen Saver";
-			productReference = 525B3B413055AF09006235FB /* The Last Brushstroke Screen Saver.saver */;
+			productReference = 525B3B413055AF09006235FB /* The Last Brushstroke.saver */;
 			productType = "com.apple.product-type.bundle";
 		};
 		52682A6330505EE9001D4AC3 /* The Last Brushstroke */ = {
@@ -177,6 +227,7 @@
 				TargetAttributes = {
 					525B3B403055AF09006235FB = {
 						CreatedOnToolsVersion = 26.6;
+						LastSwiftMigration = 2660;
 					};
 					52682A6330505EE9001D4AC3 = {
 						CreatedOnToolsVersion = 26.6;
@@ -261,18 +312,25 @@
 		525B3B483055AF09006235FB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "The-Last-Brushstroke-Screen-Saver-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSPrincipalClass = The_Last_Brushstroke_Screen_SaverView;
+				INFOPLIST_KEY_NSPrincipalClass = The_Last_Brushstroke.LastBrushstrokeScreenSaverView;
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sam.The-Last-Brushstroke-Screen-Saver";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sam072.The-Last-Brushstroke.ScreenSaver";
+				PRODUCT_NAME = "The Last Brushstroke";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
 				WRAPPER_EXTENSION = saver;
 			};
 			name = Debug;
@@ -280,18 +338,24 @@
 		525B3B493055AF09006235FB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "The-Last-Brushstroke-Screen-Saver-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSPrincipalClass = The_Last_Brushstroke_Screen_SaverView;
+				INFOPLIST_KEY_NSPrincipalClass = The_Last_Brushstroke.LastBrushstrokeScreenSaverView;
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sam.The-Last-Brushstroke-Screen-Saver";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sam072.The-Last-Brushstroke.ScreenSaver";
+				PRODUCT_NAME = "The Last Brushstroke";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 6.0;
 				WRAPPER_EXTENSION = saver;
 			};
 			name = Release;

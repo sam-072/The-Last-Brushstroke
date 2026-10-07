@@ -10,21 +10,21 @@ final class LastBrushstrokeScreenSaverView: ScreenSaverView {
     private var spriteView: SKView?
     private var persistence: LocalPersistenceService?
 
-    private var frameCounter = 0
-
     private let requiredPaintingDuration: TimeInterval = 3_600
 
     override var isOpaque: Bool {
         true
     }
 
-    override init?(frame: NSRect, isPreview: Bool) {
-        self.engine = PaintingEngine(
-            requiredDuration: 3_600,
-            activityPolicy: .lockOnly
+    override init?(
+        frame: NSRect,
+        isPreview: Bool
+    ) {
+        engine = PaintingEngine(
+            requiredDuration: 3_600
         )
 
-        self.scene = PaintingScene(
+        scene = PaintingScene(
             size: frame.size
         )
 
@@ -40,12 +40,11 @@ final class LastBrushstrokeScreenSaverView: ScreenSaverView {
     }
 
     required init?(coder: NSCoder) {
-        self.engine = PaintingEngine(
-            requiredDuration: 3_600,
-            activityPolicy: .lockOnly
+        engine = PaintingEngine(
+            requiredDuration: 3_600
         )
 
-        self.scene = PaintingScene(
+        scene = PaintingScene(
             size: .zero
         )
 
@@ -58,19 +57,14 @@ final class LastBrushstrokeScreenSaverView: ScreenSaverView {
         restorePaintingState()
 
         startPaintingIfNeeded()
+
+        renderCurrentState()
     }
 
     override func animateOneFrame() {
         super.animateOneFrame()
 
         renderCurrentState()
-
-        frameCounter += 1
-
-        if frameCounter >= 50 {
-            frameCounter = 0
-            savePaintingState()
-        }
     }
 
     override func stopAnimation() {
@@ -114,13 +108,13 @@ final class LastBrushstrokeScreenSaverView: ScreenSaverView {
 
         scene.size = bounds.size
 
-        view.presentScene(scene)
-
         if isPreview {
             scene.scaleMode = .aspectFill
         } else {
             scene.scaleMode = .resizeFill
         }
+
+        view.presentScene(scene)
     }
 
     private func startPaintingIfNeeded() {
@@ -138,8 +132,6 @@ final class LastBrushstrokeScreenSaverView: ScreenSaverView {
         case .completed:
             break
         }
-
-        renderCurrentState()
     }
 
     private func renderCurrentState() {
@@ -174,7 +166,7 @@ final class LastBrushstrokeScreenSaverView: ScreenSaverView {
 
         } catch {
             print(
-                "Screen Saver failed to restore painting state: \(error)"
+                "Failed to restore painting state: \(error)"
             )
         }
     }
@@ -195,7 +187,7 @@ final class LastBrushstrokeScreenSaverView: ScreenSaverView {
 
         } catch {
             print(
-                "Screen Saver failed to save painting state: \(error)"
+                "Failed to save painting state: \(error)"
             )
         }
     }
